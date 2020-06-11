@@ -260,6 +260,83 @@ function nth(list, index) {
 }
 /** ========*/
 
+/** ========*/
+function convolution(arrays) {
+  return arrays.reduce((acc, array) => [...acc, ...array], []);
+}
+/** ========*/
+
+/** ========*/
+function every(array, predicate) {
+  let isValid = true;
+  for (let i = 0; i < array.length; i++) {
+    if (!predicate(array[i])) {
+      isValid = false;
+      break;
+    }
+  }
+
+  return isValid;
+}
+
+function some(array, predicate) {
+  let isValid = false;
+  for (let i = 0; i < array.length; i++) {
+    if (predicate(array[i])) {
+      isValid = true;
+    }
+  }
+
+  return isValid;
+}
+/** ========*/
+
+/** ========*/
+class Vector {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  sum({ x, y }) {
+    return {
+      x: this.x + x,
+      y: this.y + y,
+    };
+  }
+
+  minus({ x, y }) {
+    return {
+      x: this.x - x,
+      y: this.y - y,
+    };
+  }
+
+  get length() {
+    return Math.sqrt(this.x ** 2 + this.y ** 2);
+  }
+}
+/** ========*/
+
+/** ========*/
+
+function primitiveMultiply(a, b) {
+  if (Math.random() < 0.1) {
+    return a * b;
+  }
+
+  throw new Error("Opps");
+}
+
+function reliableMultiply(a, b) {
+  try {
+    return primitiveMultiply(a, b);
+  } catch (e) {
+    return reliableMultiply(a, b);
+  }
+}
+/** ========*/
+
 export {
   anagramm,
   dscount,
@@ -280,4 +357,9 @@ export {
   prepend,
   nth,
   listToArray,
+  convolution,
+  every,
+  some,
+  Vector,
+  reliableMultiply,
 };
