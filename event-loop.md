@@ -164,4 +164,4 @@ createMicroTasks(2, "second micro");
 createMacroTask(2, "second macro");
 ```
 
-![event-loop1-result](https://github.com/bogdanq/js-lessons/tree/master/assets/event-loop1.png)
+![event-loop1-result](https://github.com/bogdanq/js-lessons/raw/master/assets/event-loop1.png)
