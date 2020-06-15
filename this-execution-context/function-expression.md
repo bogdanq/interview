@@ -1,18 +1,21 @@
-### this в стрелочной функции (function expression / лямбда-функция)
+## this в стрелочной функции (function expression / лямбда-функция)
 
 В стрелочных функциях, this привязан к окружению, в котором была создана функция. В глобальной области видимости this будет указывать на глобальный объект.
 
 - стрелочная ф-я - не имеет своего контекста
-- call, bind, apply - не заменяют контекст стрелочной функции
+- `call`, `bind`, `apply` - не заменяют контекст стрелочной функции
 - ф-я берет контекст от родительской области видимости (при обьявлении), не завиисмо от места вызова
 - стрелочную функцию нельзя использовать в роли функции-конструктора
-- стрелочная функция не имеет `arguments`
+- стрелочная функция не имеет `arguments` (наследуют его как и this)
 
 ```js
 var age = "global";
+
 const source = {
   age: "binding age",
 };
+
+const arrow = () => console.log(arguments); // arguments is not defined
 
 const arrowFunction = () => console.log(this.age);
 
@@ -41,7 +44,7 @@ new arrowFunction(); // arrowFunction is not a constructor
 function withTimeout() {
   // стрелочная функция взяла контекст от места создания у родительской функции withTimeout
   setTimeout(() => {
-    console.log(this.age); // binding age
+    console.log(this.age, arguments); // binding age
   }, 500);
 
   // внутри setTimeout - переопределит не явно контекст функции, что бы исправить, нужно вызывать с bind или стрелочуню функцию
