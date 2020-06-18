@@ -131,8 +131,6 @@ console.log("finish sync", arr.length);
 ## Пример 3
 
 ```js
-console.log("sync 1");
-
 const createPromise = (i, name) =>
   Promise.resolve().then(() => console.log(`micro task - ${i}: ${name}`));
 
@@ -154,6 +152,10 @@ const createMacroTask = (count, name) => {
   }
   console.log("sync in createMacroTask function", name);
 };
+
+// вызов
+
+console.log("sync 1");
 
 createMacroTask(2, "first macro");
 
