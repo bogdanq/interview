@@ -131,7 +131,7 @@ if (
 }
 ```
 
-Перед каждым вызовом Компонента - вызывается [prepareHooks](https://github.com/facebook/react/blob/5f06576f51ece88d846d01abd2ddd575827c6127/packages/react-reconciler/src/ReactFiberBeginWork.js#L409). Где текущая Fiber нода и ее первый узел - будут храниться в глобальных переменных.
+Перед каждым вызовом Компонента - вызывается [prepareHooks](https://github.com/facebook/react/blob/5f06576f51ece88d846d01abd2ddd575827c6127/packages/react-reconciler/src/ReactFiberBeginWork.js#L409). Где текущая Fiber нода и ее первый узел - будут храниться в глобальных переменных. После выполнения работы, вызввается [finishHooks](https://github.com/facebook/react/blob/5f06576f51ece88d846d01abd2ddd575827c6127/packages/react-reconciler/src/ReactFiberHooks.js#L148)
 
 ```js
 // Имплементация редюсера
