@@ -257,4 +257,75 @@ function getValuesSum(tree) {
   return values;
 }
 
-console.log(getValuesSum(t1)); // 22
+// console.log(getValuesSum(t1)); // 22
+
+/*
+Написать реализацию функции flow, создающую функцию, которая прогонит переданные в неё данные через все функции,
+переданные в сам flow.
+
+Пример использования:
+
+const add = x => y => y + x
+const multiple = x => y => y * x
+
+flow(
+  add(2),
+  multiple(3),
+)(4);
+
+Должно вывести 18 // ((4+2)*3)
+
+Аналог multiple(3)(add(2)(4))
+*/
+
+function flow(...args) {
+  return function (a) {
+    return args.reduce((acc, foo) => foo(acc), a);
+  };
+}
+
+const add2 = (x) => (y) => y + x;
+const multiple2 = (x) => (y) => y * x;
+
+// console.log(flow(add2(2), multiple2(3))(4));
+
+// @TODO Есть два сортированных массива с числами.
+// Нужно написать функцию, которая возвращает новый массив,
+// содержащий элементы, которые встречаются в обоих массивах.
+function findEqualElements2(arr1, arr2) {
+  const [source, target] =
+    arr1.length >= arr2.length ? [arr2, arr1] : [arr1, arr2];
+
+  return source.filter((num) => {
+    const hasInSource = target.includes(num);
+
+    if (hasInSource) {
+      const index = target.indexOf(2);
+
+      target.splice(index, 1);
+    }
+
+    return hasInSource;
+  });
+}
+
+function findEqualElements(arr1, arr2) {
+  const map = arr1.reduce((acc, item) => {
+    acc[item] = (acc[item] || 0) + 1;
+
+    return acc;
+  }, {});
+
+  return arr2.reduce((acc, item) => {
+    if (map[item]) {
+      map[item] -= 1;
+      acc.push(item);
+    }
+
+    return acc;
+  }, []);
+}
+
+// console.log(findEqualElements([1, 2, 3], [2])); // => [2]
+// console.log(findEqualElements([2], [1, 2, 3])); // => [2]
+// console.log(findEqualElements([1, 2, 2, 3], [2, 2, 2, 2])); // => [2, 2]
