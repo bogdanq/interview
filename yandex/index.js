@@ -359,3 +359,47 @@ function rle(str) {
 }
 
 // console.log(rle("AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB"));
+
+/**
+ * @TODO
+ * ограничить хеш длинной в 6 символов
+ * если буква заглавная - умножить ее на 2
+ * если длина меньше чем 6 - добавить 0
+ * H - 8 * 2
+ * a - 1
+ * s - 19
+ * h - 8
+ *
+ * 9 + 1 + 19 + 8 = 44
+ *
+ * 440000
+ */
+
+function getHash(str) {
+  let result = 0;
+  const MAX_NUM = 999999;
+
+  const abc = Array.from({ length: 26 }, (_, i) => {
+    return (i + 10).toString(36);
+  });
+
+  const hash = str.replace(/\s/g, "").split("");
+
+  hash.forEach((char) => {
+    const isUpperCase = char.toUpperCase() === char;
+
+    const index = abc.indexOf(char.toLowerCase()) + 1;
+
+    if (isUpperCase) {
+      result += index * 2;
+    } else {
+      result += index;
+    }
+  });
+
+  return result > MAX_NUM
+    ? result.toString().substr(0, 6)
+    : result.toString().padEnd(6, "0");
+}
+
+console.log(getHash("Hash"));
