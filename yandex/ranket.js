@@ -55,6 +55,7 @@ function getAnagram(subs) {
 
     for (let i = 0; i < subs.length; i++) {
       if (subs[i] === char) {
+        console.log(char);
         count += 1;
       }
     }
@@ -78,6 +79,8 @@ function sherlockAndAnagrams(s) {
 
 // console.log(sherlockAndAnagrams("abba")); // 4
 // console.log(sherlockAndAnagrams("kkkk"));// 10
+
+console.log(sherlockAndAnagrams("Турбореактивность"));
 
 /**
  * @TODO
@@ -206,3 +209,57 @@ function getTotalTime(user1, user2) {
 }
 
 // console.log(getTotalTime([[4, 8]], [[2, 6]])); // 4-6
+
+// Equal Sides Of An Array
+// Дан массив чисел, найти индекс, слева от которого сумма элементов равна сумме элементов справа.
+// Для {1,2,3,4,3,2,1} решением будет 3, потому что слева сумма {1,2,3} равна сумме справа {3,2,1}
+
+const equalSides = (arr) => {
+  let index = 0;
+  let result = -1;
+
+  while (index !== arr.length) {
+    let left = 0;
+    let right = 0;
+
+    for (let i = index; i < arr.length; i++) {
+      right = arr[i] + right;
+    }
+
+    for (let i = 0; i < index + 1; i++) {
+      left = arr[i] + left;
+    }
+
+    if (left === right) {
+      result = index;
+      break;
+    }
+
+    index++;
+  }
+
+  return result;
+};
+
+const equalSides = (arr) => {
+  let result = -1;
+  let left = 0;
+  let right = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    right = arr[i] + right;
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    right = right - arr[i];
+
+    if (left === right) {
+      result = i;
+      break;
+    }
+
+    left = left + arr[i];
+  }
+
+  return result;
+};

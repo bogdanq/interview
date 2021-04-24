@@ -402,4 +402,4 @@ function getHash(str) {
     : result.toString().padEnd(6, "0");
 }
 
-console.log(getHash("Hash"));
+// console.log(getHash("Hash"));
