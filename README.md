@@ -1,5 +1,6 @@
 ### Заметки по js
 
+- [Задачи на вступительные екзамены тинькофф 2023](https://github.com/bogdanq/interview/blob/master/tinkoff/index.js)
 - [this in function-declaration](https://github.com/bogdanq/js-lessons/blob/master/this-execution-context/function-declaration.md)
 - [this in function-expression](https://github.com/bogdanq/js-lessons/blob/master/this-execution-context/function-expression.md)
 - [prototype](https://github.com/bogdanq/js-lessons/blob/master/prototype.md)
