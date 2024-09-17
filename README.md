@@ -9,3 +9,4 @@
 - [event-loop](https://github.com/bogdanq/js-lessons/blob/master/event-loop.md)
 - [ООП](https://github.com/bogdanq/js-lessons/blob/master/OOP/oop.md)
 - [Задачи по js](https://github.com/bogdanq/js-lessons/blob/master/tasks.js)
+- test
