@@ -330,36 +330,6 @@ function findEqualElements(arr1, arr2) {
 // console.log(findEqualElements([2], [1, 2, 3])); // => [2]
 // console.log(findEqualElements([1, 2, 2, 3], [2, 2, 2, 2])); // => [2, 2]
 
-// @TODO Дана строка (возможно, пустая), состоящая из букв A-Z:
-// AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB
-// Нужно написать функцию RLE, которая на выходе даст строку вида:
-// A4B3C2XYZD4E3F3A6B28
-// И сгенерирует ошибку, если на вход пришла невалидная строка.
-// Пояснения:
-// Если символ встречается 1 раз, он остается без изменений;
-
-function rle(str) {
-  const arr = str.split("");
-  let result = "";
-  let count = 0;
-
-  for (let i = 0; i < arr.length; i++) {
-    const currentChar = arr[i];
-    const nextChar = arr[i + 1];
-
-    count++;
-
-    if (currentChar !== nextChar) {
-      result = result + `${currentChar}${count > 1 ? count : ""}`;
-      count = 0;
-    }
-  }
-
-  return result;
-}
-
-// console.log(rle("AAAABBBCCXYZDDDDEEEFFFAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBB"));
-
 /**
  * @TODO
  * ограничить хеш длинной в 6 символов
