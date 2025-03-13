@@ -1,8 +1,9 @@
 const tasks = {
   rle,
-  lengthOfLongestSubstring,
-  longestPalindrome,
+  lengthOfLongestSubstring, // medium
+  longestPalindrome, // medium
   isPalindrome,
+  romanToInt,
 };
 
 /**
@@ -94,4 +95,53 @@ const isPalindrome = (s) => {
   return true;
 };
 
-const longestPalindrome = function (s) {};
+/**
+@TODO
+сложный поиск самого длинного палиндрома в строке
+*/
+const longestPalindrome = function (s = "") {
+  let left = 0;
+  let right = 0;
+  let maxLen = 0;
+
+  while (right < s.length) {
+    const isP = s.slice(left, right + 1);
+    if (!isPalindrome(isP)) {
+    }
+
+    right++;
+  }
+};
+
+/**
+@TODO
+Сложность в исключениях IV - 4
+нужно строку проходить справа налево и тогда можно словить исключение
+если текущее значение менше прошлого - исключение
+*/
+const romanToInt = function (s = "") {
+  let res = 0;
+  const roman = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+
+  let prev = 0;
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (roman[s[i]] < prev) {
+      res = res - roman[s[i]];
+    } else {
+      res = res + roman[s[i]];
+    }
+
+    prev = roman[s[i]];
+  }
+
+  return res;
+};
