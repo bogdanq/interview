@@ -1,6 +1,8 @@
 const tasks = {
   rle,
   lengthOfLongestSubstring,
+  longestPalindrome,
+  isPalindrome,
 };
 
 /**
@@ -66,5 +68,30 @@ const lengthOfLongestSubstring = function (s) {
 
   return maxLength;
 };
-
 // lengthOfLongestSubstring("appart") === 4
+
+/**
+@TODO
+Простой палиндром, сделан через два указателя
+левый идет слева-направо, а правый справа-налево и необходимо сравнить каждый символ с каждым
+если есть хотя бы одно неравенство - выйти из цикла
+*/
+const isPalindrome = (s) => {
+  s = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+};
+
+const longestPalindrome = function (s) {};
