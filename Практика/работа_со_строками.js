@@ -1,10 +1,11 @@
 const tasks = {
   rle, // easy
-  lengthOfLongestSubstring, // medium
+  lengthOfLongestSubstring, // medium [скользящее окно]
   longestPalindrome, // medium
   isPalindrome, // easy
   romanToInt, // easy
   longestCommonPrefix, // easy
+  strStr, // easy [скользящее окно]
 };
 
 /**
@@ -176,3 +177,29 @@ const longestCommonPrefix = function (strs = []) {
   return prevValidPreffix;
 };
 // longestCommonPrefix(["flower", "flow", "flight"]) === "fl";
+
+/**
+@TODO
+  Классическая задача на скользящее окно фиксированной длины
+  просто проходим окном каждый отрезок строки и возвращаем левы  индекс первого входа
+*/
+const strStr = function (haystack = "", needle = "") {
+  let right = needle.length;
+  let left = 0;
+  let index = -1;
+
+  while (right <= haystack.length) {
+    const char = haystack.slice(left, right);
+
+    if (char !== needle) {
+      left++;
+    } else {
+      return left;
+    }
+
+    right++;
+  }
+
+  return index;
+};
+// strStr("sadbutsad", "sad") === 0;
