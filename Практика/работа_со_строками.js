@@ -1,9 +1,10 @@
 const tasks = {
-  rle,
+  rle, // easy
   lengthOfLongestSubstring, // medium
   longestPalindrome, // medium
-  isPalindrome,
-  romanToInt,
+  isPalindrome, // easy
+  romanToInt, // easy
+  longestCommonPrefix, // easy
 };
 
 /**
@@ -53,13 +54,13 @@ const lengthOfLongestSubstring = function (s) {
 
   while (right < s.length) {
     if (map.has(s[right])) {
-      const prevLeft = map.get(s[right]);
+      const sameLetterIndex = map.get(s[right]);
 
-      for (let i = left; i < prevLeft; i++) {
+      for (let i = left; i < sameLetterIndex; i++) {
         map.delete(s[i]);
       }
 
-      left = prevLeft + 1;
+      left = sameLetterIndex + 1;
     }
 
     maxLength = Math.max(maxLength, right - left + 1);
@@ -145,3 +146,33 @@ const romanToInt = function (s = "") {
 
   return res;
 };
+
+/**
+@TODO
+  квадратичное решение, сравнивем каждую букву с каждым словом
+  в более быстрой вариации можно отсортировать входной массив (по умолчанию) и сравнить первый с последним
+*/
+const longestCommonPrefix = function (strs = []) {
+  const firstStr = strs.shift() || "";
+  let prefixLength = 1;
+  let prevValidPreffix = "";
+
+  if (!strs.length) {
+    return firstStr;
+  }
+
+  while (prefixLength <= firstStr.length) {
+    const prefix = firstStr.slice(0, prefixLength);
+    const isValidPrefixes = strs.every((str) => str.startsWith(prefix));
+
+    if (isValidPrefixes) {
+      prefixLength++;
+      prevValidPreffix = prefix;
+    } else {
+      break;
+    }
+  }
+
+  return prevValidPreffix;
+};
+// longestCommonPrefix(["flower", "flow", "flight"]) === "fl";
