@@ -48,4 +48,24 @@ const removeDuplicates = function (nums = []) {
 
   return left + 1;
 };
-// removeDuplicates([1,1,2]) === 2, nums = [1,2,1];
+// removeDuplicates([1, 1, 2, 3, 4, 4]); = 1,2,3,4 (4)
+
+/**
+@TODO
+  задача простая, если понять суть перестановки, тут перестановка не нужна, нужна перезапись исходного числа
+  если индекс не совпал, двигаем указатель, и тогда на следущем несовпадении указатель окадется на старом несовпадении
+  и мы сможем записать число без совпадения на место предыдущего индекса
+*/
+const removeElement = function (nums = [], val) {
+  let left = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[left] = nums[i];
+      left++;
+    }
+  }
+
+  return left;
+};
+// removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
