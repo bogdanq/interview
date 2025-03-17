@@ -1,5 +1,6 @@
 const tasks = {
   twoSum, // easy
+  removeDuplicates, // easy
 };
 
 /**
@@ -25,3 +26,26 @@ const twoSum = function (nums = [], target = 0) {
   }
 };
 // twoSum([2, 11, 15, 7], 9) === [2, 3];
+
+/**
+@TODO
+  простой поиск проход по массиву и сложность заключается с проведении перестановки
+  необходимо переставлять не i<=>i+1
+  а нужно перезаписать nums[left] на число без повтора, и некст число оставить без изменения
+  что бы оно попало верно под условия неравенства i!==i+1
+
+  left - переменная, которая записывает кол-во перезаписей (в итоге это длина уникального массива)
+*/
+const removeDuplicates = function (nums = []) {
+  let left = 0;
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] !== nums[i + 1]) {
+      left++;
+      nums[left] = nums[i + 1];
+    }
+  }
+
+  return left + 1;
+};
+// removeDuplicates([1,1,2]) === 2, nums = [1,2,1];
