@@ -100,3 +100,25 @@ const binarySearch = function (nums = [], target = 0) {
   return left;
 };
 // binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 9);
+
+var plusOne = function (digits = []) {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i] = digits[i] + 1;
+
+      return digits;
+    }
+
+    if (digits[i] === 9 && i === 0) {
+      digits[i] = 0;
+
+      return [1, ...digits];
+    }
+
+    if (digits[i] === 9) {
+      digits[i] = 0;
+    }
+  }
+};
+
+plusOne([9, 9]);
