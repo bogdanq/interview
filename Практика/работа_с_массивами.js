@@ -1,6 +1,8 @@
 const tasks = {
   twoSum, // easy
   removeDuplicates, // easy
+  removeElement, // easy
+  binarySearch, // easy
 };
 
 /**
@@ -69,3 +71,32 @@ const removeElement = function (nums = [], val) {
   return left;
 };
 // removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
+
+/**
+@TODO
+  без рекурсии можно сделать left\right индексы и искать середину от их суммы
+  середина будет центиральной частью массива
+
+  что бы двигать поиск на нужною половину мы должны увеличивать left на прошлую середину + 1или уменьшеть right на прошлую середины - 1
+  если середина массива меньше, чем таргет, значит таргет находится правее и нужно сдвигать поиск направо путем увеличения left
+  если середина массива больше, чем таргет, значит таргет находится левее и нужно сдвигать поиск налево путем уменьшения right
+*/
+const binarySearch = function (nums = [], target = 0) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    let mid = Math.ceil((left + right) / 2);
+
+    if (nums[half] === target) {
+      return half;
+    } else if (nums[half] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return left;
+};
+// binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 9);
