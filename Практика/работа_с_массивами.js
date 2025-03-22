@@ -4,6 +4,7 @@ const tasks = {
   removeElement, // easy
   binarySearch, // easy
   isAnagram, // easy
+  reverseString, // easy
 };
 
 /**
@@ -169,3 +170,25 @@ const isAnagram = function (s = "", t = "") {
   return true;
 };
 // isAnagram("aacc", "ccac");
+
+/**
+@TODO
+  посто перестановка с единовременным походом слева и справа
+*/
+const reverseString = function (s) {
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < Math.floor(s.length / 2)) {
+    console.log(s[left]);
+    let prev = s[left];
+    s[left] = s[right];
+    s[right] = prev;
+
+    left++;
+    right--;
+  }
+
+  return s;
+};
+// reverseString(["h", "e", "l", "l", "o"]);
