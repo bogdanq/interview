@@ -3,6 +3,7 @@ const tasks = {
   removeDuplicates, // easy
   removeElement, // easy
   binarySearch, // easy
+  isAnagram, // easy
 };
 
 /**
@@ -116,5 +117,55 @@ var plusOne = function (digits = []) {
     }
   }
 };
+// plusOne([9, 9]);
 
-plusOne([9, 9]);
+/**
+@TODO
+https://codesandbox.io/p/sandbox/algotitms-list-f25sqy
+*/
+const mergePart = (a, b) => {
+  const result = [];
+
+  while (a.length && b.length) {
+    if (a[0] < b[0]) {
+      result.push(a.shift());
+    } else {
+      result.push(b.shift());
+    }
+  }
+
+  return [...result, ...a, ...b];
+};
+
+const mergeSort = (arr) => {
+  const mid = Math.floor(arr.length / 2);
+
+  if (arr.length < 2) {
+    return arr;
+  }
+
+  return mergePart(mergeSort(arr.slice(0, mid)), mergeSort(arr.slice(mid)));
+};
+
+const isAnagram = function (s = "", t = "") {
+  if (s.length !== t.length) {
+    return false;
+  }
+
+  const map = new Map();
+
+  for (let i = 0; i < s.length; i++) {
+    map.set(s[i], (map.get(s[i]) || 0) + 1);
+  }
+
+  for (let j = 0; j < t.length; j++) {
+    if (!map.get(t[j])) {
+      return false;
+    }
+
+    map.set(t[j], map.get(t[j]) - 1);
+  }
+
+  return true;
+};
+// isAnagram("aacc", "ccac");
