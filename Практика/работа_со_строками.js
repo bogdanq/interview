@@ -203,3 +203,35 @@ const strStr = function (haystack = "", needle = "") {
   return index;
 };
 // strStr("sadbutsad", "sad") === 0;
+
+/**
+@TODO
+  Классическая задача на два укащателя, нужно составить правильно условия их смещения
+*/
+const reverseVowels = function (s) {
+  s = s.split("");
+  const vowels = { a: "a", e: "e", i: "i", o: "o", u: "u" };
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (!vowels[s[left]]) {
+      left++;
+      continue;
+    }
+
+    if (!vowels[s[right]]) {
+      right--;
+      continue;
+    }
+
+    let prev = s[left];
+    s[left] = s[right];
+    s[right] = prev;
+    right--;
+    left++;
+  }
+
+  return s.join("");
+};
+// reverseVowels("leetcodezx");
