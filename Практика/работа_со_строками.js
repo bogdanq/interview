@@ -6,6 +6,9 @@ const tasks = {
   romanToInt, // easy
   longestCommonPrefix, // easy
   strStr, // easy [скользящее окно]
+  reverseVowels, // easy два указателя
+  canConstruct, // easy хеш мап
+  firstUniqChar, // easy хеш мап
 };
 
 /**
@@ -235,3 +238,43 @@ const reverseVowels = function (s) {
   return s.join("");
 };
 // reverseVowels("leetcodezx");
+
+const canConstruct = function (ransomNote, magazine) {
+  if (ransomNote.length > magazine.length) {
+    return false;
+  }
+
+  const map = new Map();
+
+  for (let i = 0; i < magazine.length; i++) {
+    map.set(magazine[i], (map.get(magazine[i]) || 0) + 1);
+  }
+
+  for (let i = 0; i < ransomNote.length; i++) {
+    if (!map.get(ransomNote[i])) {
+      return false;
+    }
+
+    map.set(ransomNote[i], map.get(ransomNote[i]) - 1);
+  }
+
+  return true;
+};
+// canConstruct("aa", "aab") true
+
+const firstUniqChar = function (s) {
+  const map = new Map();
+
+  for (let i = 0; i < s.length; i++) {
+    map.set(s[i], (map.get(s[i]) || 0) + 1);
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    if (map.get(s[i]) === 1) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+// firstUniqChar("112334"); => 2
