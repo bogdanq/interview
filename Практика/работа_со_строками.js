@@ -1,7 +1,6 @@
 const tasks = {
   rle, // easy
   lengthOfLongestSubstring, // medium [скользящее окно]
-  longestPalindrome, // medium
   isPalindrome, // easy
   romanToInt, // easy
   longestCommonPrefix, // easy
@@ -10,6 +9,7 @@ const tasks = {
   canConstruct, // easy хеш мап
   firstUniqChar, // easy хеш мап
   sumString, // easy twoe pointer
+  longestPalindrome, // medium
 };
 
 /**
@@ -99,24 +99,6 @@ const isPalindrome = (s) => {
   }
 
   return true;
-};
-
-/**
-@TODO
-  сложный поиск самого длинного палиндрома в строке
-*/
-const longestPalindrome = function (s = "") {
-  let left = 0;
-  let right = 0;
-  let maxLen = 0;
-
-  while (right < s.length) {
-    const isP = s.slice(left, right + 1);
-    if (!isPalindrome(isP)) {
-    }
-
-    right++;
-  }
 };
 
 /**
@@ -305,3 +287,54 @@ const sumString = function (n1, n2) {
   return [count || "", ...result].join("");
 };
 // sumString("2", "99") === "101"
+
+/**
+@TODO
+  Сложная задача на поиск длинного палиндрома, решается практически в лоб, за исключением оптимизированного палиндрома
+  и условия над вызовом isPalindrome
+
+  задачу можно решать с помощью прохода и поиска палиндрома от центра слова (более быстрый способ)
+ */
+var longestPalindrome = function (s) {
+  if (s.length === 0) {
+    return "";
+  }
+
+  /**
+    isPalindrome отличается от классического прохода по строке, потому что тут передан массиво [start, end]
+ */
+  const isPalindrome = function (s, [i, j]) {
+    let left = i;
+    let right = j;
+
+    while (left < right) {
+      if (s[left] != s[right]) {
+        return false;
+      }
+      left++;
+      right--;
+    }
+    return true;
+  };
+
+  const result = [0, 0];
+
+  for (let i = 0; i < s.length; i++) {
+    let left = i + 1;
+
+    while (left <= s.length) {
+      const substr = [i, left];
+
+      if (result[1] - result[0] <= substr[1] - substr[0]) {
+        if (isPalindrome(s, substr)) {
+          result[0] = substr[0];
+          result[1] = substr[1];
+        }
+      }
+
+      left++;
+    }
+  }
+
+  return s.slice(result[0], result[1] + 1);
+};
