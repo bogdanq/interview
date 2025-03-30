@@ -238,3 +238,17 @@ const findWords = function (words) {
   return result;
 };
 findWords(["Hello", "Alaska", "Dad", "Peace"]); // [Alaska, Dad]
+
+const findDisappearedNumbers = function (nums) {
+  const hash = new Set(nums);
+  const rs = [];
+
+  for (let i = 1; i <= nums.length; i++) {
+    if (!hash.has(i)) {
+      rs.push(i);
+    }
+  }
+
+  return rs;
+};
+findDisappearedNumbers([1, 1, 1, 1, 1]); //  [2, 3, 4, 5]
