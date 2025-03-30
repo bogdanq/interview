@@ -5,6 +5,7 @@ const tasks = {
   binarySearch, // easy
   isAnagram, // easy
   reverseString, // easy
+  findWords, // easy
 };
 
 /**
@@ -192,3 +193,49 @@ const reverseString = function (s) {
   return s;
 };
 // reverseString(["h", "e", "l", "l", "o"]);
+
+/**
+@TODO
+  постой перебор + мап, более быстрый способ фильтр через регулярки
+*/
+const findWords = function (words) {
+  const result = [];
+
+  const map = new Map();
+
+  const data = [
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["z", "x", "c", "v", "b", "n", "m"],
+  ];
+
+  data.forEach((ws, index) => {
+    ws.forEach((w) => {
+      map.set(w, index + 1);
+    });
+  });
+
+  for (let word of words) {
+    let isValidRow = true;
+    let left = 0;
+
+    while (left < word.length - 1) {
+      if (
+        map.get(word[left].toLowerCase()) !==
+        map.get(word[left + 1].toLowerCase())
+      ) {
+        isValidRow = false;
+        break;
+      }
+
+      left++;
+    }
+
+    if (isValidRow) {
+      result.push(word);
+    }
+  }
+
+  return result;
+};
+findWords(["Hello", "Alaska", "Dad", "Peace"]); // [Alaska, Dad]
