@@ -6,6 +6,7 @@ const tasks = {
   isAnagram, // easy
   reverseString, // easy
   findWords, // easy
+  reverseStr, // easy
 };
 
 /**
@@ -181,7 +182,6 @@ const reverseString = function (s) {
   let right = s.length - 1;
 
   while (left < Math.floor(s.length / 2)) {
-    console.log(s[left]);
     let prev = s[left];
     s[left] = s[right];
     s[right] = prev;
@@ -239,3 +239,36 @@ const findWords = function (words) {
   return result;
 };
 findWords(["Hello", "Alaska", "Dad", "Peace"]); // [Alaska, Dad]
+
+/**
+@TODO
+  вариация задачи на реверс, за исключением того, что нужно переворачивать конкретные отрезки
+*/
+const reverseStr = function (s = "", k) {
+  let result = "";
+  const reverse = function (s) {
+    s = s.split("");
+    let left = 0;
+    let right = s.length - 1;
+
+    while (left < s.length / 2) {
+      [s[left], s[right]] = [s[right], s[left]];
+
+      left++;
+      right--;
+    }
+
+    return s.join("");
+  };
+
+  for (let j = 0, i = 0; i < s.length; i += k, j++) {
+    if (j % 2 === 0) {
+      result += reverse(s.substring(i, i + k));
+    } else {
+      result += s.substring(i, i + k);
+    }
+  }
+
+  return result;
+};
+reverseStr("123456789", 2);
