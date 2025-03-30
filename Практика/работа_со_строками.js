@@ -10,6 +10,9 @@ const tasks = {
   firstUniqChar, // easy хеш мап
   sumString, // easy twoe pointer
   longestPalindrome, // medium
+  reverseStr, // easy
+  checkRecord, // easy
+  reverseWords, // easy
 };
 
 /**
@@ -338,3 +341,91 @@ var longestPalindrome = function (s) {
 
   return s.slice(result[0], result[1] + 1);
 };
+
+/**
+@TODO
+  вариация задачи на реверс, за исключением того, что нужно переворачивать конкретные отрезки
+*/
+const reverseStr = function (s = "", k) {
+  let result = "";
+  const reverse = function (s) {
+    s = s.split("");
+    let left = 0;
+    let right = s.length - 1;
+
+    while (left < s.length / 2) {
+      [s[left], s[right]] = [s[right], s[left]];
+
+      left++;
+      right--;
+    }
+
+    return s.join("");
+  };
+
+  for (let j = 0, i = 0; i < s.length; i += k, j++) {
+    if (j % 2 === 0) {
+      result += reverse(s.substring(i, i + k));
+    } else {
+      result += s.substring(i, i + k);
+    }
+  }
+
+  return result;
+};
+reverseStr("123456789", 2);
+
+const checkRecord = function (s) {
+  let totalA = 0;
+  let totalL = 0;
+
+  let left = 0;
+
+  while (left < s.length && totalA < 2 && totalL < 3) {
+    const day = s[left];
+
+    if (day === "L") {
+      totalL++;
+    }
+
+    if (day === "A") {
+      totalA++;
+    }
+
+    if (day !== "L") {
+      totalL = 0;
+    }
+
+    left++;
+  }
+
+  return totalA < 2 && totalL < 3;
+};
+checkRecord("LALL");
+
+const reverseWords = function (s = "") {
+  s = s.split(" ");
+  const result = [];
+
+  const reverse = function (s) {
+    s = s.split("");
+    let left = 0;
+    let right = s.length - 1;
+
+    while (left < s.length / 2) {
+      [s[left], s[right]] = [s[right], s[left]];
+
+      left++;
+      right--;
+    }
+
+    return s.join("");
+  };
+
+  for (i = 0; i < s.length; i++) {
+    result.push(reverse(s[i]));
+  }
+
+  return result.join(" ");
+};
+reverseWords("Mr Ding") === "rM gniD";
