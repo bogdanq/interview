@@ -252,3 +252,44 @@ const findDisappearedNumbers = function (nums) {
   return rs;
 };
 findDisappearedNumbers([1, 1, 1, 1, 1]); //  [2, 3, 4, 5]
+
+/**
+@TODO
+  Задача на правильное составдение мапы, можно запомнить индексы первого массива, что бы не делать поиск
+  перебором по второму массиву можно получать индекс одинакового слова и по сумме индексов можно найти минимальный индекс
+  если индекс минимум, то перезаписать, если одинаковый - запушить
+
+  сложность в подборе изначального формата хранения данных [Infinity, []] - подходит для хранения массива слов
+*/
+const findRestaurant = function (list1, list2) {
+  const map = new Map();
+
+  const min = [Infinity, []];
+
+  for (let i = 0; i < list1.length; i++) {
+    if (map.has(list1[i])) {
+      map.set(list1[i], i);
+    }
+  }
+
+  for (let i = 0; i < list2.length; i++) {
+    const leftIdx = map.get(list2[i]);
+
+    if (leftIdx !== undefined) {
+      const sum = leftIdx + i;
+
+      if (sum < min[0]) {
+        min[0] = sum;
+        min[1] = [list2[i]];
+      } else if (sum === min[0]) {
+        min[1].push(list2[i]);
+      }
+    }
+  }
+
+  return min[1];
+};
+findRestaurant(
+  ["Shogun", "Tapioca Express", "Burger King", "KFC"],
+  ["KFC", "Shogun", "Burger King"]
+); // ["Shogun"]
