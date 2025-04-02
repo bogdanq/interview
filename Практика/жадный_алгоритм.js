@@ -2,6 +2,7 @@ const tasks = {
   // Жадный алгоритм
   atm, // easy
   coinChange, // easy
+  canPlaceFlowers,
 };
 
 /**
@@ -44,3 +45,26 @@ const coinChange = (coins, amount) => {
   return coinsCount;
 };
 coinChange([10, 5, 20, 1, 15, 25], 60); // 3
+
+/**
+@TODO
+  Жадный алгоритм не всегда про сортировку, это пример подхода, когда мы всегда что то делаем,
+  например в задаче мы считаем что всегда сажаем цветок и смотрим условие
+  маленькими шагами делаем действие и считаем, что это приведет к верному решению
+*/
+const canPlaceFlowers = function (flowerbed, n) {
+  for (let i = 0; i < flowerbed.length; i++) {
+    if (
+      flowerbed[i] + (flowerbed[i - 1] || 0) + (flowerbed[i + 1] || 0) ===
+      0
+    ) {
+      if (n === 0) return true;
+      flowerbed[i] = 1;
+      n--;
+    }
+  }
+
+  return n <= 0;
+};
+
+canPlaceFlowers([0, 0, 1, 0, 0], 1);
