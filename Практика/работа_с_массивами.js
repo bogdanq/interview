@@ -293,3 +293,27 @@ findRestaurant(
   ["Shogun", "Tapioca Express", "Burger King", "KFC"],
   ["KFC", "Shogun", "Burger King"]
 ); // ["Shogun"]
+
+/**
+@TODO
+  Задачу можно решить классическим окном, но тут можно вычислять только граничные значения sum - [i-l] + [i]
+  алгоритм помогает не проходить все числа по новой, а сделать 1 проход и изменять сумму первых k символов
+*/
+const findMaxAverage = function (nums, k) {
+  let sumK = 0;
+
+  for (let i = 0; i < k; i++) {
+    sumK += nums[i];
+  }
+
+  let maxAverage = sumK;
+
+  for (let i = k; i < nums.length; i++) {
+    sumK = sumK - nums[i - k] + nums[i];
+
+    maxAverage = Math.max(maxAverage, sumK);
+  }
+
+  return maxAverage / k;
+};
+findMaxAverage([0, 4, 0, 3, 2], 1); //12.75
