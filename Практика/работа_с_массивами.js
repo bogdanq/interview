@@ -317,3 +317,29 @@ const findMaxAverage = function (nums, k) {
   return maxAverage / k;
 };
 findMaxAverage([0, 4, 0, 3, 2], 1); //12.75
+
+/**
+@TODO
+  Задачу можно решить двумя циклами, в первом собрать мап, во втором смотреть i+1 и если его нет в мапе - значит его не хватает
+  прогресия может быть в любом порядке
+  более правильный вариант - посчитать прогрессию и вычесть из нее сумму фактических чисел
+*/
+const findErrorNums = function (nums) {
+  const map = new Map();
+  let dublicate = 0;
+  let actualSum = 0;
+  let idealSum = (nums.length * (nums.length + 1)) / 2;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(nums[i])) {
+      dublicate = nums[i];
+    } else {
+      map.set(nums[i], i);
+    }
+
+    actualSum += nums[i];
+  }
+
+  return [dublicate, idealSum - (actualSum - dublicate)];
+};
+findErrorNums([1, 2, 2, 4]); // 2 3
