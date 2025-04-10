@@ -373,7 +373,7 @@ const reverseStr = function (s = "", k) {
 
   return result;
 };
-reverseStr("123456789", 2);
+// reverseStr("123456789", 2);
 
 const checkRecord = function (s) {
   let totalA = 0;
@@ -401,7 +401,7 @@ const checkRecord = function (s) {
 
   return totalA < 2 && totalL < 3;
 };
-checkRecord("LALL");
+// checkRecord("LALL");
 
 const reverseWords = function (s = "") {
   s = s.split(" ");
@@ -428,4 +428,30 @@ const reverseWords = function (s = "") {
 
   return result.join(" ");
 };
-reverseWords("Mr Ding") === "rM gniD";
+// reverseWords("Mr Ding") === "rM gniD";
+
+/**
+@TODO
+  вариация палиндрома, есть решение в лоб, можно удалять каждую букву и смотреть является и новое слово палиндромом
+  более быстрый способ - два указателя, если буквы не равны нужно посмотреть два новых под слова и если они не являются палиндромами
+  то вернуть false
+*/
+const validPalindrome = function (s) {
+  let left = 0,
+    right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return (
+        isPalindrome(s.slice(left, right)) ||
+        isPalindrome(s.slice(left + 1, right + 1))
+      );
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+};
+// validPalindrome("abca")// true - удалили с
