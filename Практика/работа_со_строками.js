@@ -13,6 +13,9 @@ const tasks = {
   reverseStr, // easy
   checkRecord, // easy
   reverseWords, // easy
+  validPalindrome, // easy twoe pointer
+  mostCommonWord, // easy
+  shortestToChar, // easy
 };
 
 /**
@@ -455,3 +458,60 @@ const validPalindrome = function (s) {
   return true;
 };
 // validPalindrome("abca")// true - удалили с
+
+/**
+@TODO
+  в задаче подход на правильном создании мапы + регулярка
+*/
+const mostCommonWord = function (paragraph = "", banned) {
+  paragraph = paragraph.toLowerCase().match(/[a-z]+/gi);
+  banned = new Set(banned);
+
+  let maxLengthStringCount = 0;
+  let maxLengthString = "";
+
+  const map = new Map();
+
+  for (const word of paragraph) {
+    if (!banned.has(word)) {
+      map.set(word, (map.get(word) || 0) + 1);
+    }
+  }
+
+  for (const [word, count] of map) {
+    if (maxLengthStringCount < count) {
+      maxLengthStringCount = count;
+      maxLengthString = word;
+    }
+  }
+
+  return maxLengthString;
+};
+mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", [
+  "hit",
+]); //ball
+
+const shortestToChar = function (s, c) {
+  const shortests = [];
+  const indexes = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === c) {
+      indexes.push(i);
+    }
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    let path = Infinity;
+
+    for (let j = 0; j < indexes.length; j++) {
+      path = Math.min(path, Math.abs(indexes[i] - i));
+    }
+
+    shortests.push(path);
+  }
+
+  return shortests;
+};
+
+shortestToChar("loveleetcode", "e");
