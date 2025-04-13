@@ -505,7 +505,7 @@ const shortestToChar = function (s, c) {
     let path = Infinity;
 
     for (let j = 0; j < indexes.length; j++) {
-      path = Math.min(path, Math.abs(indexes[i] - i));
+      path = Math.min(path, Math.abs(indexes[j] - i));
     }
 
     shortests.push(path);
@@ -513,5 +513,23 @@ const shortestToChar = function (s, c) {
 
   return shortests;
 };
-
 shortestToChar("loveleetcode", "e");
+
+const toGoatLatin = function (sentence) {
+  sentence = sentence.split(" ");
+  const vowels = new Set(["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]);
+  let result = "";
+
+  for (let i = 0; i < sentence.length; i++) {
+    if (!vowels.has(sentence[i][0])) {
+      sentence[i] = sentence[i].slice(1) + sentence[i][0];
+    }
+
+    sentence[i] += "ma" + "a".repeat(i + 1);
+    result += " " + sentence[i];
+  }
+
+  return result.trim();
+};
+
+console.log(toGoatLatin("I speak Goat Latin"));
