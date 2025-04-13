@@ -16,6 +16,7 @@ const tasks = {
   validPalindrome, // easy twoe pointer
   mostCommonWord, // easy
   shortestToChar, // easy
+  largeGroupPositions, //  [скользящее окно]
 };
 
 /**
@@ -531,5 +532,26 @@ const toGoatLatin = function (sentence) {
 
   return result.trim();
 };
+toGoatLatin("I speak Goat Latin");
 
-console.log(toGoatLatin("I speak Goat Latin"));
+const largeGroupPositions = function (s) {
+  const result = [];
+
+  let right = 1;
+  let left = 0;
+
+  while (right < s.length || left < s.length) {
+    if (s[right] !== s[left]) {
+      if (right - left >= 3) {
+        result.push([left, right - 1]);
+      }
+
+      left = right;
+    }
+
+    right++;
+  }
+
+  return result;
+};
+largeGroupPositions("abbxxxxzzy"); // [[3,6]]
