@@ -18,6 +18,7 @@ const tasks = {
   shortestToChar, // easy
   largeGroupPositions, //  [скользящее окно]
   removePalindromeSub, // easy two pointer
+  stringMatching, // easy
 };
 
 /**
@@ -579,3 +580,24 @@ const removePalindromeSub = function (s) {
   return 1;
 };
 // removePalindromeSub("ababa");
+
+/**
+@TODO
+  в задаче важно условие, ВАЖНО найти слово, которое является частью другого слова
+  хотя бы ОДИН раз
+*/
+const stringMatching = function (words) {
+  const result = [];
+
+  for (const word of words) {
+    for (const nextWord of words) {
+      if (word !== nextWord && nextWord.includes(word)) {
+        result.push(word);
+        break;
+      }
+    }
+  }
+
+  return result;
+};
+stringMatching(["mass", "as", "hero", "superhero"]); // ["as","hero"]
