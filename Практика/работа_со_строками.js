@@ -19,6 +19,7 @@ const tasks = {
   largeGroupPositions, //  [скользящее окно]
   removePalindromeSub, // easy two pointer
   stringMatching, // easy
+  reformat, // easy, two pointer
 };
 
 /**
@@ -601,3 +602,46 @@ const stringMatching = function (words) {
   return result;
 };
 stringMatching(["mass", "as", "hero", "superhero"]); // ["as","hero"]
+
+/**
+@TODO
+  В задаче нужно посчитать кол-во цивр и букв
+  еслти букв больше - новая строка начинаетсч с буквы, если цифр больше или длины равны - новое слово начинаетс с цифры
+  двумя курсорами можем забирть буквы в нужном порядке из переменных, в которые запомнили строку или цифру
+*/
+const reformat = function (s) {
+  let int = "";
+  let letter = "";
+  let result = "";
+
+  for (char of s) {
+    if (char.charCodeAt() >= 97) {
+      letter += char;
+    } else {
+      int += char;
+    }
+  }
+
+  if (Math.abs(letter.length - int.length) > 1) return s;
+
+  let left = 0;
+  let right = 0;
+
+  while (left < letter.length || right < int.length) {
+    if (letter.length === int.length || letter.length < int.length) {
+      result += int[right] || "";
+      result += letter[left] || "";
+    }
+
+    if (letter.length > int.length) {
+      result += letter[left] || "";
+      result += int[right] || "";
+    }
+
+    right++;
+    left++;
+  }
+
+  return result;
+};
+// reformat("a0b1c2");  0a1b2c
