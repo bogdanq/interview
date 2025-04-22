@@ -17,6 +17,7 @@ const tasks = {
   mostCommonWord, // easy
   shortestToChar, // easy
   largeGroupPositions, //  [скользящее окно]
+  removePalindromeSub, // easy two pointer
 };
 
 /**
@@ -555,3 +556,26 @@ const largeGroupPositions = function (s) {
   return result;
 };
 largeGroupPositions("abbxxxxzzy"); // [[3,6]]
+
+/**
+@TODO
+  в задаче только два типа символов, поэтому есть макстмум 2 шага, минииум 1
+  если символы с противоположных сторон не равны - значит тут 2 шага
+  если полное слово палиндром, то 1 шаг
+*/
+const removePalindromeSub = function (s) {
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return 2;
+    }
+
+    left++;
+    right--;
+  }
+
+  return 1;
+};
+// removePalindromeSub("ababa");
