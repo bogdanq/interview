@@ -20,6 +20,8 @@ const tasks = {
   removePalindromeSub, // easy two pointer
   stringMatching, // easy
   reformat, // easy, two pointer
+  maxPower, // [скользящее окно]
+  destCity, // map set
 };
 
 /**
@@ -645,3 +647,38 @@ const reformat = function (s) {
   return result;
 };
 // reformat("a0b1c2");  0a1b2c
+
+const destCity = function (paths) {
+  const startCity = new Set();
+
+  for (const [city] of paths) {
+    startCity.add(city);
+  }
+
+  for (const [_, city] of paths) {
+    if (!startCity.has(city)) return city;
+  }
+};
+// destCity([
+//   ["London", "New York"],
+//   ["New York", "Lima"],
+//   ["Lima", "Sao Paulo"],
+// ]); // Sao Paulo
+
+const maxPower = function (s) {
+  let maxCount = 0;
+  let left = 0;
+  let right = 0;
+
+  while (right < s.length) {
+    if (s[right] !== s[left]) {
+      left = right;
+    }
+
+    maxCount = Math.max(right - left + 1, maxCount);
+    right++;
+  }
+
+  return maxCount;
+};
+maxPower("zzeeeee"); // 2
