@@ -723,3 +723,21 @@ const thousandSeparator = function (n) {
   return res;
 };
 thousandSeparator("1234"); // 1.234
+
+const maxDepth = function (s) {
+  let maxOpenBrackets = 0;
+  let currentOpenBrackets = 0;
+
+  for (const char of s) {
+    if (char === "(") {
+      currentOpenBrackets++;
+
+      maxOpenBrackets = Math.max(maxOpenBrackets, currentOpenBrackets);
+    } else if (char === ")") {
+      currentOpenBrackets--;
+    }
+  }
+
+  return maxOpenBrackets;
+};
+maxDepth("(1+(2*3)+((8)/4))+1"); // 3
