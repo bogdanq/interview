@@ -704,3 +704,22 @@ const makeGood = function (s) {
   return stack.join("");
 };
 makeGood("abBAcC"); // ''
+
+const thousandSeparator = function (n) {
+  n = String(n);
+  let res = "";
+  let count = 0;
+
+  for (let i = n.length - 1; i >= 0; i--) {
+    if (count === 3) {
+      count = 0;
+      res = "." + res;
+    }
+
+    count++;
+    res = n[i] + res;
+  }
+
+  return res;
+};
+thousandSeparator("1234"); // 1.234
