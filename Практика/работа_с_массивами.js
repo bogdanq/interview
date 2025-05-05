@@ -343,3 +343,42 @@ const findErrorNums = function (nums) {
   return [dublicate, idealSum - (actualSum - dublicate)];
 };
 findErrorNums([1, 2, 2, 4]); // 2 3
+
+/**
+@TODO
+  Создание мапы + проход с сопоставлением
+  можно упростить, просто увеличивать индекс или уменьшат ьв массиве, главное, что бы в результате был элемент (кому доверяют) массива
+  который равен n-1 повторений
+*/
+const findJudge = function (n, trust) {
+  let temp = 1;
+  let links = new Map();
+
+  for (const [whoTrust, whomTrust] of trust) {
+    if (!links.has(whoTrust)) {
+      links.set(whoTrust, new Set());
+    }
+
+    links.get(whoTrust).add(whomTrust);
+
+    if (!links.has(whomTrust)) {
+      temp = whomTrust;
+    }
+  }
+
+  if (links.size !== n - 1) return -1;
+
+  for (const [_, edges] of links) {
+    if (!edges.has(temp)) {
+      return -1;
+    }
+  }
+
+  return temp;
+};
+findJudge(4, [
+  [1, 3],
+  [2, 3],
+  [2, 1],
+  [4, 3],
+]); // 3
