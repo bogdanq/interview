@@ -6,6 +6,9 @@ const tasks = {
   PromiseAny,
   PromiseRace,
   PromiseWithAbort,
+
+  // https://leetcode.com/problems/promise-time-limit/
+  timeLimit, // medium
 };
 
 const sleep = (timeout, hasError, controller) => {
@@ -187,5 +190,25 @@ function PromiseWithAbort(promise, ms) {
   });
 }
 // PromiseWithAbort((controller) => sleep(500, false, controller), 1)
+//   .then(console.log)
+//   .catch(console.log);
+
+function timeLimit(fn, t) {
+  return async function (...args) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject({ rejected: "Time Limit Exceeded", time: t });
+      }, t);
+
+      fn(...args)
+        .then(resolve)
+        .catch(reject)
+        .finally(() => clearInterval(timer));
+    });
+  };
+}
+// timeLimit(async () => {
+//   throw "Error";
+// }, 1000)()
 //   .then(console.log)
 //   .catch(console.log);
