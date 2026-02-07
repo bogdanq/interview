@@ -104,7 +104,7 @@ const binarySearch = function (nums = [], target = 0) {
 };
 // binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 9);
 
-var plusOne = function (digits = []) {
+const plusOne = function (digits = []) {
   for (let i = digits.length - 1; i >= 0; i--) {
     if (digits[i] < 9) {
       digits[i] = digits[i] + 1;
@@ -382,3 +382,30 @@ findJudge(4, [
   [2, 1],
   [4, 3],
 ]); // 3
+
+var fairCandySwap = function (aliceSizes, bobSizes) {
+  const aliceSum = aliceSizes.reduce(
+    (accumulated, current) => accumulated + current,
+    0
+  );
+  const bobSum = bobSizes.reduce(
+    (accumulated, current) => accumulated + current,
+    0
+  );
+
+  const bobSizesSet = new Set(bobSizes);
+
+  const diff = Math.ceil((aliceSum - bobSum) / 2); //1
+
+  for (let i = 0; i < aliceSizes.length; i++) {
+    const targetBobCandy = aliceSizes[i] - diff;
+
+    if (bobSizesSet.has(targetBobCandy)) {
+      return [aliceSizes[i], targetBobCandy];
+    }
+  }
+
+  return [];
+};
+
+fairCandySwap([1, 1], [2, 2]);
