@@ -6,6 +6,7 @@ const tasks = {
   isAnagram, // easy
   reverseString, // easy
   findWords, // easy
+  validMountainArray,
 };
 
 /**
@@ -291,7 +292,7 @@ const findRestaurant = function (list1, list2) {
 };
 findRestaurant(
   ["Shogun", "Tapioca Express", "Burger King", "KFC"],
-  ["KFC", "Shogun", "Burger King"]
+  ["KFC", "Shogun", "Burger King"],
 ); // ["Shogun"]
 
 /**
@@ -386,11 +387,11 @@ findJudge(4, [
 var fairCandySwap = function (aliceSizes, bobSizes) {
   const aliceSum = aliceSizes.reduce(
     (accumulated, current) => accumulated + current,
-    0
+    0,
   );
   const bobSum = bobSizes.reduce(
     (accumulated, current) => accumulated + current,
-    0
+    0,
   );
 
   const bobSizesSet = new Set(bobSizes);
@@ -407,5 +408,22 @@ var fairCandySwap = function (aliceSizes, bobSizes) {
 
   return [];
 };
+// fairCandySwap([1, 1], [2, 2]);
 
-fairCandySwap([1, 1], [2, 2]);
+var validMountainArray = function (arr) {
+  if (arr.length < 3) return false;
+
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < arr.length - 1 && arr[left] < arr[left + 1]) {
+    left++;
+  }
+
+  while (right > 0 && arr[right] < arr[right - 1]) {
+    right--;
+  }
+
+  return left === right && right < arr.length - 1 && left > 0;
+};
+// validMountainArray([1,2,3,4,3]) true

@@ -212,3 +212,29 @@ function timeLimit(fn, t) {
 // }, 1000)()
 //   .then(console.log)
 //   .catch(console.log);
+
+var merge = function (nums1, m, nums2, n) {
+  let left = 0;
+  let right = 0;
+  const result = [];
+
+  while (left < m && right < n) {
+    if (nums1[left] <= nums2[right]) {
+      result.push(nums1[left]);
+      left++;
+    } else {
+      result.push(nums2[right]);
+      right++;
+    }
+  }
+
+  while (left < m) {
+    result.push(nums1[left++]);
+  }
+
+  while (right < n) {
+    result.push(nums2[right++]);
+  }
+
+  return result;
+};
